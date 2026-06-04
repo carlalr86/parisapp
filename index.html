@@ -810,10 +810,11 @@ function Avatar({ name, highlight }) {
   );
 }
 
-function MapButtons({ addr, t, mapPref }) {
+function MapButtons({ addr, mapUrl, t, mapPref }) {
   const primaryIsApple = mapPref === "apple";
-  const primaryHref = primaryIsApple ? amaps(addr) : gmaps(addr);
-  const altHref = primaryIsApple ? gmaps(addr) : amaps(addr);
+  const googleHref = mapUrl || gmaps(addr);
+  const primaryHref = primaryIsApple ? amaps(addr) : googleHref;
+  const altHref = primaryIsApple ? googleHref : amaps(addr);
   const altLabel = primaryIsApple ? "Google Maps" : t.appleMaps;
   return (
     <div className="mapbtns">
@@ -857,7 +858,7 @@ function ExcursionCard({ ex, lang, t, mapPref, i }) {
         </div>
       </div>
 
-      <MapButtons addr={ex.address} t={t} mapPref={mapPref} />
+      <MapButtons addr={ex.address} mapUrl={ex.mapUrl} t={t} mapPref={mapPref} />
     </article>
   );
 }
@@ -910,7 +911,7 @@ function StayCard({ st, lang, t, mapPref, query, i }) {
         </div>
       </div>
 
-      <MapButtons addr={st.address} t={t} mapPref={mapPref} />
+      <MapButtons addr={st.address} mapUrl={st.mapUrl} t={t} mapPref={mapPref} />
     </article>
   );
 }

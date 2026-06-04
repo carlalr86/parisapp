@@ -22,43 +22,55 @@ window.TRIP = {
 --------------------------------------------------------------------------- */
 window.EXCURSIONS = [
   {
-    id: "louvre",
+    id: "winetasting",
     day: { es: "Día 1", en: "Day 1" },
     date: { es: "Jue 15 oct", en: "Thu 15 Oct" },
-    time: "10:00 – 13:00",
-    title: { es: "Museo del Louvre", en: "Louvre Museum" },
-    desc: {
-      es: "Recorrido por la colección principal. Punto de encuentro bajo la Pirámide.",
-      en: "Tour of the main collection. Meeting point under the Pyramid.",
+    time: "12:15",
+    title: {
+      es: "Cata de vinos y almuerzo de quesos con sumiller",
+      en: "Wine Tasting & Cheese Lunch with an Expert Sommelier",
     },
-    meet: { es: "Pirámide del Louvre", en: "Louvre Pyramid" },
-    address: "Rue de Rivoli, 75001 Paris, France",
+    desc: {
+      es: "Sesión guiada de cata de vinos con almuerzo de quesos dirigido por un sumiller experto.",
+      en: "Guided wine tasting session with a cheese lunch led by an expert sommelier.",
+    },
+    meet: { es: "Ver ubicación en mapa", en: "See location on map" },
+    address: "Wine Tasting & Cheese Lunch Paris",
+    mapUrl: "https://maps.app.goo.gl/gcScpzHyPsmXSSz2A",
   },
   {
-    id: "eiffel",
+    id: "catacombs",
     day: { es: "Día 2", en: "Day 2" },
     date: { es: "Vie 16 oct", en: "Fri 16 Oct" },
-    time: "15:00 – 18:00",
-    title: { es: "Torre Eiffel y Campo de Marte", en: "Eiffel Tower & Champ de Mars" },
-    desc: {
-      es: "Subida a la 2ª planta y picnic en el parque. Llegar 15 min antes.",
-      en: "Ascent to the 2nd floor and picnic in the park. Arrive 15 min early.",
+    time: "15:30 llegada · 15:45 inicio",
+    title: {
+      es: "Catacumbas y crucero por el Sena con audioguía",
+      en: "Catacombs Entry & Seine River Cruise with Audio Guide",
     },
-    meet: { es: "Pilar Este (Pilier Est)", en: "East Pillar (Pilier Est)" },
-    address: "Champ de Mars, 5 Av. Anatole France, 75007 Paris, France",
+    desc: {
+      es: "Entrada a las catacumbas de París seguida de crucero por el Sena con audioguía. ¡Llegar a las 15:30!",
+      en: "Entry to the Paris Catacombs followed by a Seine River Cruise with Audio Guide. Arrive at 15:30!",
+    },
+    meet: { es: "Llegar a las 15:30 (inicio 15:45)", en: "Arrive at 15:30 (starts 15:45)" },
+    address: "Catacombes de Paris, 75014 Paris",
+    mapUrl: "https://maps.app.goo.gl/1dFX49TCnAHH6EA66",
   },
   {
-    id: "versailles",
+    id: "beaumarchais",
     day: { es: "Día 3", en: "Day 3" },
     date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
-    time: "09:30 – 16:00",
-    title: { es: "Palacio de Versalles", en: "Palace of Versailles" },
-    desc: {
-      es: "Día completo: palacio y jardines. Salida en grupo desde los hospedajes.",
-      en: "Full day: palace and gardens. Group departure from the lodgings.",
+    time: "21:00",
+    title: {
+      es: "Cena en JJ Beaumarchais",
+      en: "Dinner at JJ Beaumarchais",
     },
-    meet: { es: "Place d'Armes (entrada principal)", en: "Place d'Armes (main entrance)" },
-    address: "Place d'Armes, 78000 Versailles, France",
+    desc: {
+      es: "Cena de grupo en el restaurante JJ Beaumarchais.",
+      en: "Group dinner at JJ Beaumarchais restaurant.",
+    },
+    meet: { es: "En el restaurante", en: "At the restaurant" },
+    address: "JJ Beaumarchais, Paris",
+    mapUrl: "https://maps.app.goo.gl/FUJdHK5bHZ4bzno48",
   },
 ];
 
@@ -70,32 +82,36 @@ window.EXCURSIONS = [
 --------------------------------------------------------------------------- */
 window.ACCOMMODATIONS = [
   {
-    id: "marais",
-    name: "Hôtel Le Marais",
-    area: { es: "Le Marais · 4º", en: "Le Marais · 4th" },
-    address: "12 Rue de Turenne, 75004 Paris, France",
-    members: ["Ana", "Carlos", "Lucía"],
-  },
-  {
-    id: "bastille",
-    name: "Citadines Bastille",
+    id: "diese",
+    name: "Dièse Hôtel Bastille",
     area: { es: "Bastille · 11º", en: "Bastille · 11th" },
-    address: "14 Rue de la Roquette, 75011 Paris, France",
-    members: ["Diego", "Marta", "Sofía"],
+    address: "Dièse Hôtel Bastille, Paris",
+    mapUrl: "https://maps.app.goo.gl/P8ZEy2PSuT4zyTKLA",
+    members: ["Lucia", "Nicolae", "Radu", "Daniel"],
   },
   {
-    id: "montmartre",
-    name: "Appart' Montmartre",
-    area: { es: "Montmartre · 18º", en: "Montmartre · 18th" },
-    address: "8 Rue Lepic, 75018 Paris, France",
-    members: ["Javier", "Elena", "Pablo"],
+    id: "folie",
+    name: "Hôtel Folie – Orso Hotels",
+    area: { es: "París", en: "Paris" },
+    address: "Hôtel Folie Orso Hotels, Paris",
+    mapUrl: "https://maps.app.goo.gl/PdVuB3JM3uarycEu5",
+    members: ["Teemu", "Amanda", "Diana"],
   },
   {
-    id: "germain",
-    name: "Hôtel Saint-Germain",
-    area: { es: "Saint-Germain · 6º", en: "Saint-Germain · 6th" },
-    address: "36 Rue Bonaparte, 75006 Paris, France",
-    members: ["Noa", "Mateo", "Inés"],
+    id: "terreneuve",
+    name: "Hotel Terre Neuve",
+    area: { es: "París", en: "Paris" },
+    address: "Hotel Terre Neuve, Paris",
+    mapUrl: "https://maps.app.goo.gl/g4EvszRm6kbvfH8g8",
+    members: ["Jonathan", "Julie", "Christina"],
+  },
+  {
+    id: "airbnb",
+    name: "Airbnb",
+    area: { es: "París", en: "Paris" },
+    address: "Airbnb Paris",
+    mapUrl: "https://maps.app.goo.gl/BgF4baPbPz4Hvzkm6",
+    members: ["Carla"],
   },
 ];
 
