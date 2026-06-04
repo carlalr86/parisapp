@@ -10,7 +10,7 @@ window.TRIP = {
   title: "París 2026",
   team: "Product Discovery",
   // Free-form, language-specific date range label
-  dates: { es: "16 – 18 oct 2026", en: "16 – 18 Oct 2026" },
+  dates: { es: "16 – 18 jun 2026", en: "16 – 18 Jun 2026" },
 };
 
 /* --- 3 EXCURSIONS ---------------------------------------------------------
@@ -24,7 +24,7 @@ window.EXCURSIONS = [
   {
     id: "winetasting",
     day: { es: "Experiencia 1", en: "Experience 1" },
-    date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
+    date: { es: "Mié 17 jun", en: "Wed 17 Jun" },
     time: "12:15 PM",
     title: {
       es: "Cata de vinos y almuerzo de quesos con sumiller",
@@ -41,7 +41,7 @@ window.EXCURSIONS = [
   {
     id: "catacombs",
     day: { es: "Experiencia 2", en: "Experience 2" },
-    date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
+    date: { es: "Mié 17 jun", en: "Wed 17 Jun" },
     time: "3:45 PM",
     title: {
       es: "Catacumbas y crucero por el Sena con audioguía",
@@ -58,7 +58,7 @@ window.EXCURSIONS = [
   {
     id: "beaumarchais",
     day: { es: "Experiencia 3", en: "Experience 3" },
-    date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
+    date: { es: "Mié 17 jun", en: "Wed 17 Jun" },
     time: "9:00 PM",
     title: {
       es: "Cena en JJ Beaumarchais",

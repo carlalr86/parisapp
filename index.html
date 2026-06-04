@@ -833,18 +833,44 @@ function MapButtons({ addr, mapUrl, t, mapPref }) {
   );
 }
 
-/* ---------- Geocode cache (Nominatim / OpenStreetMap) ---------- */
+/* ---------- Geocode cache + resolver ---------- */
 const _geoCache = {};
-async function _geocode(q) {
-  if (_geoCache[q] !== undefined) return _geoCache[q];
-  try {
-    const r = await fetch(
-      `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`
-    );
-    const j = await r.json();
-    const v = j[0] ? { lat: parseFloat(j[0].lat), lng: parseFloat(j[0].lon) } : null;
-    return (_geoCache[q] = v);
-  } catch { return (_geoCache[q] = null); }
+
+async function _resolveItem(item) {
+  const key = item.mapUrl || item.query;
+  if (_geoCache[key] !== undefined) return _geoCache[key];
+
+  // 1. Try extracting coordinates from the Google Maps short link via CORS proxy
+  if (item.mapUrl) {
+    try {
+      const res = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(item.mapUrl)}`
+      );
+      const json = await res.json();
+      const finalUrl = json?.status?.url || '';
+      const m = finalUrl.match(/@(-?\d+\.?\d+),(-?\d+\.?\d+)/);
+      if (m) {
+        const pt = { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
+        return (_geoCache[key] = pt);
+      }
+    } catch {}
+  }
+
+  // 2. Fallback: Nominatim text search
+  if (item.query) {
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(item.query)}&format=json&limit=1`
+      );
+      const j = await res.json();
+      if (j[0]) {
+        const pt = { lat: parseFloat(j[0].lat), lng: parseFloat(j[0].lon) };
+        return (_geoCache[key] = pt);
+      }
+    } catch {}
+  }
+
+  return (_geoCache[key] = null);
 }
 
 function TripMap({ items, showRoute = false }) {
@@ -865,8 +891,9 @@ function TripMap({ items, showRoute = false }) {
     (async () => {
       for (let i = 0; i < items.length; i++) {
         if (dead) return;
-        const wasCached = _geoCache[items[i].query] !== undefined;
-        const pt = await _geocode(items[i].query);
+        const key = items[i].mapUrl || items[i].query;
+        const wasCached = _geoCache[key] !== undefined;
+        const pt = await _resolveItem(items[i]);
         if (dead) return;
         if (pt) {
           const ic = window.L.divIcon({
@@ -881,8 +908,7 @@ function TripMap({ items, showRoute = false }) {
             ? map.fitBounds(pts, { padding: [36, 36] })
             : map.setView([pt.lat, pt.lng], 14);
         }
-        if (!wasCached && i < items.length - 1)
-          await new Promise(r => setTimeout(r, 1150));
+        if (!wasCached) await new Promise(r => setTimeout(r, 400));
       }
       if (!dead && showRoute && pts.length > 1)
         window.L.polyline(pts, { color: '#7F56FA', weight: 2.5, dashArray: '5,10', opacity: 0.6 }).addTo(map);
@@ -938,6 +964,7 @@ function ExcursionsView({ lang, t, mapPref }) {
   const mapItems = window.EXCURSIONS.map((ex) => ({
     name: ex.title[lang],
     query: ex.address,
+    mapUrl: ex.mapUrl,
   }));
   return (
     <section className="view">
@@ -999,6 +1026,7 @@ function StaysView({ lang, t, mapPref }) {
   const mapItems = window.ACCOMMODATIONS.map((st) => ({
     name: st.name,
     query: st.address,
+    mapUrl: st.mapUrl,
   }));
 
   const { list, matchNames } = useMemo(() => {
@@ -1063,7 +1091,7 @@ function StaysView({ lang, t, mapPref }) {
 }
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "defaultLang": "es",
+  "defaultLang": "en",
   "mapPref": "google"
 }/*EDITMODE-END*/;
 
