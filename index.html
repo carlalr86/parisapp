@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>París · Product Discovery</title>
 <link rel="stylesheet" href="project/colors_and_type.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous" />
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -294,6 +295,8 @@
 </head>
 <body>
   <div id="root"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
 
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -830,6 +833,74 @@ function MapButtons({ addr, mapUrl, t, mapPref }) {
   );
 }
 
+/* ---------- Geocode cache (Nominatim / OpenStreetMap) ---------- */
+const _geoCache = {};
+async function _geocode(q) {
+  if (_geoCache[q] !== undefined) return _geoCache[q];
+  try {
+    const r = await fetch(
+      `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`
+    );
+    const j = await r.json();
+    const v = j[0] ? { lat: parseFloat(j[0].lat), lng: parseFloat(j[0].lon) } : null;
+    return (_geoCache[q] = v);
+  } catch { return (_geoCache[q] = null); }
+}
+
+function TripMap({ items, showRoute = false }) {
+  const domRef = useRef(null);
+
+  useEffect(() => {
+    if (!domRef.current || !window.L) return;
+    let dead = false;
+
+    const map = window.L.map(domRef.current, {
+      center: [48.856, 2.352], zoom: 12, scrollWheelZoom: false,
+    });
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
+    }).addTo(map);
+
+    const pts = [];
+    (async () => {
+      for (let i = 0; i < items.length; i++) {
+        if (dead) return;
+        const wasCached = _geoCache[items[i].query] !== undefined;
+        const pt = await _geocode(items[i].query);
+        if (dead) return;
+        if (pt) {
+          const ic = window.L.divIcon({
+            html: `<div style="background:#7F56FA;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.28);font-family:sans-serif">${i + 1}</div>`,
+            iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -15], className: '',
+          });
+          window.L.marker([pt.lat, pt.lng], { icon: ic })
+            .bindPopup(`<b style="font-size:13px;font-family:sans-serif">${items[i].name}</b>`)
+            .addTo(map);
+          pts.push([pt.lat, pt.lng]);
+          pts.length > 1
+            ? map.fitBounds(pts, { padding: [36, 36] })
+            : map.setView([pt.lat, pt.lng], 14);
+        }
+        if (!wasCached && i < items.length - 1)
+          await new Promise(r => setTimeout(r, 1150));
+      }
+      if (!dead && showRoute && pts.length > 1)
+        window.L.polyline(pts, { color: '#7F56FA', weight: 2.5, dashArray: '5,10', opacity: 0.6 }).addTo(map);
+    })();
+
+    return () => { dead = true; map.remove(); };
+  }, []);
+
+  return (
+    <div style={{
+      borderRadius: 'var(--radius-lg)', overflow: 'hidden',
+      border: '1px solid var(--line-1)', marginBottom: 20, height: 230,
+    }}>
+      <div ref={domRef} style={{ height: '100%', width: '100%' }} />
+    </div>
+  );
+}
+
 function ExcursionCard({ ex, lang, t, mapPref, i }) {
   return (
     <article className="card excard" style={{ animationDelay: `${i * 70}ms` }}>
@@ -864,12 +935,17 @@ function ExcursionCard({ ex, lang, t, mapPref, i }) {
 }
 
 function ExcursionsView({ lang, t, mapPref }) {
+  const mapItems = window.EXCURSIONS.map((ex) => ({
+    name: ex.title[lang],
+    query: ex.address,
+  }));
   return (
     <section className="view">
       <header className="viewhead">
         <h2 className="viewhead__title">{t.excursionsTitle}</h2>
         <p className="viewhead__lead">{t.excursionsLead}</p>
       </header>
+      <TripMap items={mapItems} showRoute />
       <div className="stack">
         {window.EXCURSIONS.map((ex, i) => (
           <ExcursionCard key={ex.id} ex={ex} lang={lang} t={t} mapPref={mapPref} i={i} />
@@ -920,6 +996,11 @@ function StaysView({ lang, t, mapPref }) {
   const [query, setQuery] = useState("");
   const q = query.trim().toLowerCase();
 
+  const mapItems = window.ACCOMMODATIONS.map((st) => ({
+    name: st.name,
+    query: st.address,
+  }));
+
   const { list, matchNames } = useMemo(() => {
     if (!q) return { list: window.ACCOMMODATIONS, matchNames: [] };
     const names = [];
@@ -937,6 +1018,8 @@ function StaysView({ lang, t, mapPref }) {
         <h2 className="viewhead__title">{t.staysTitle}</h2>
         <p className="viewhead__lead">{t.staysLead}</p>
       </header>
+
+      <TripMap items={mapItems} />
 
       <div className="searchwrap">
         <span className="searchwrap__ic"><Icon name="search" size={18} /></span>

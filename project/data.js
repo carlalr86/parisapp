@@ -10,7 +10,7 @@ window.TRIP = {
   title: "París 2026",
   team: "Product Discovery",
   // Free-form, language-specific date range label
-  dates: { es: "15 – 18 oct 2026", en: "15 – 18 Oct 2026" },
+  dates: { es: "16 – 18 oct 2026", en: "16 – 18 Oct 2026" },
 };
 
 /* --- 3 EXCURSIONS ---------------------------------------------------------
@@ -23,9 +23,9 @@ window.TRIP = {
 window.EXCURSIONS = [
   {
     id: "winetasting",
-    day: { es: "Día 1", en: "Day 1" },
-    date: { es: "Jue 15 oct", en: "Thu 15 Oct" },
-    time: "12:15",
+    day: { es: "Experiencia 1", en: "Experience 1" },
+    date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
+    time: "12:15 PM",
     title: {
       es: "Cata de vinos y almuerzo de quesos con sumiller",
       en: "Wine Tasting & Cheese Lunch with an Expert Sommelier",
@@ -40,26 +40,26 @@ window.EXCURSIONS = [
   },
   {
     id: "catacombs",
-    day: { es: "Día 2", en: "Day 2" },
-    date: { es: "Vie 16 oct", en: "Fri 16 Oct" },
-    time: "15:30 llegada · 15:45 inicio",
+    day: { es: "Experiencia 2", en: "Experience 2" },
+    date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
+    time: "3:45 PM",
     title: {
       es: "Catacumbas y crucero por el Sena con audioguía",
       en: "Catacombs Entry & Seine River Cruise with Audio Guide",
     },
     desc: {
-      es: "Entrada a las catacumbas de París seguida de crucero por el Sena con audioguía. ¡Llegar a las 15:30!",
-      en: "Entry to the Paris Catacombs followed by a Seine River Cruise with Audio Guide. Arrive at 15:30!",
+      es: "Entrada a las catacumbas de París seguida de crucero por el Sena con audioguía.",
+      en: "Entry to the Paris Catacombs followed by a Seine River Cruise with Audio Guide.",
     },
-    meet: { es: "Llegar a las 15:30 (inicio 15:45)", en: "Arrive at 15:30 (starts 15:45)" },
+    meet: { es: "Llegada 3:30 PM · Inicio 3:45 PM", en: "Arrive 3:30 PM · Starts 3:45 PM" },
     address: "Catacombes de Paris, 75014 Paris",
     mapUrl: "https://maps.app.goo.gl/1dFX49TCnAHH6EA66",
   },
   {
     id: "beaumarchais",
-    day: { es: "Día 3", en: "Day 3" },
+    day: { es: "Experiencia 3", en: "Experience 3" },
     date: { es: "Sáb 17 oct", en: "Sat 17 Oct" },
-    time: "21:00",
+    time: "9:00 PM",
     title: {
       es: "Cena en JJ Beaumarchais",
       en: "Dinner at JJ Beaumarchais",
