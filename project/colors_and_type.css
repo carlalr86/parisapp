@@ -1,0 +1,285 @@
+/* ============================================================
+   VISMA DESIGN SYSTEM — Foundations
+   Colours + Typography tokens
+   Source: design.visma.com (corporate brand), Visma Text typeface
+   ============================================================ */
+
+/* ---------- Typeface ---------- */
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-RegularItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Visma Text";
+  src: url("fonts/VismaText-ExtraBoldItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ============================================================
+     COLOUR — Primary palette
+     White-dominant base, Visma Purple as the key brand colour,
+     Visma Black for contrast and structure.
+     ============================================================ */
+  --visma-purple: #7F56FA;   /* key brand colour — PANTONE 2725 C */
+  --visma-white:  #FEFEFE;
+  --visma-black:  #131313;
+
+  /* Secondary palette — controlled, supporting roles only */
+  --olive:           #4A4608;
+  --burgundy:        #4C0C32;
+  --creme:           #F9F5F1;
+  --cool-grey:       #B9C4C9;
+  --cool-grey-light: #E7EBEC;
+
+  /* Purple tint ramp (derived for UI surfaces — not official brand swatches) */
+  --purple-700: #5B33C9;
+  --purple-600: #6D45E6;
+  --purple-500: #7F56FA;  /* = --visma-purple */
+  --purple-300: #B8A1FC;
+  --purple-100: #E9E1FE;
+  --purple-050: #F5F1FE;
+
+  /* ---------- Semantic foreground ---------- */
+  --fg-1: #131313;                       /* primary text */
+  --fg-2: #4B4B4B;                       /* secondary text */
+  --fg-3: #7A7E80;                       /* muted / captions */
+  --fg-on-dark:    #FEFEFE;
+  --fg-on-purple:  #FEFEFE;              /* always white on purple */
+  --fg-accent:     #7F56FA;
+
+  /* ---------- Semantic background ---------- */
+  --bg-1: #FEFEFE;                       /* page base */
+  --bg-2: #F9F5F1;                       /* creme — soft section */
+  --bg-3: #E7EBEC;                       /* cool grey light — panels */
+  --bg-dark:   #131313;
+  --bg-purple: #7F56FA;
+
+  /* ---------- Borders / lines ---------- */
+  --line-1: #E7EBEC;                     /* hairline */
+  --line-2: #B9C4C9;                     /* stronger divider */
+  --line-strong: #131313;
+
+  /* ---------- Functional (derived to harmonise with palette) ---------- */
+  --success: #1F7A4D;
+  --warning: #B7791F;
+  --error:   #C0392B;
+  --info:    #7F56FA;
+
+  /* ============================================================
+     AMPLIFY GRADIENT — the brand's signature expression.
+     Shifts between purple and warmer tones. Use with intent on
+     covers, highlights and brand moments; balance with white space.
+     ============================================================ */
+  --amplify: linear-gradient(110deg, #7F56FA 0%, #9B5CF2 17%, #C75DD0 40%, #E96E5A 70%, #F6A23C 100%);
+  --amplify-purple: linear-gradient(120deg, #5B33C9 0%, #7F56FA 55%, #B68CF7 100%);
+  --amplify-orange: linear-gradient(120deg, #E2664F 0%, #F59E3C 58%, #F9C46B 100%);
+  --amplify-organic: radial-gradient(130% 150% at 12% 8%, #7F56FA 0%, #9B5CF2 24%, #C75DD0 48%, #E96E5A 74%, #F6A23C 100%);
+
+  /* ============================================================
+     TYPOGRAPHY
+     Single typeface: Visma Text. Tight tracking on large display,
+     normal on body. Bold/ExtraBold for headlines, Regular for copy.
+     ============================================================ */
+  --font-sans: "Visma Text", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+
+  /* Weights */
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
+  --w-extrabold: 800;
+
+  /* Type scale (px) — major-third-ish, display-led */
+  --fs-display: 88px;
+  --fs-h1: 60px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-h4: 24px;
+  --fs-lead: 20px;
+  --fs-body: 17px;
+  --fs-small: 15px;
+  --fs-caption: 13px;
+  --fs-overline: 12px;
+
+  /* Line heights */
+  --lh-tight: 1.02;
+  --lh-snug: 1.12;
+  --lh-heading: 1.18;
+  --lh-body: 1.55;
+
+  /* Tracking */
+  --ls-display: -0.03em;
+  --ls-heading: -0.02em;
+  --ls-body: 0;
+  --ls-overline: 0.14em;
+
+  /* ============================================================
+     SPACING — 4px base scale
+     ============================================================ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ---------- Radii ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* ---------- Elevation — soft, low-contrast, neutral-cool ---------- */
+  --shadow-1: 0 1px 2px rgba(19,19,19,.06), 0 1px 1px rgba(19,19,19,.04);
+  --shadow-2: 0 4px 12px rgba(19,19,19,.08), 0 1px 3px rgba(19,19,19,.05);
+  --shadow-3: 0 12px 32px rgba(19,19,19,.10), 0 4px 8px rgba(19,19,19,.05);
+  --shadow-purple: 0 16px 40px rgba(127,86,250,.28);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES (opt-in helpers)
+   ============================================================ */
+.visma-display {
+  font-family: var(--font-sans);
+  font-weight: var(--w-extrabold);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-display);
+  color: var(--fg-1);
+}
+.visma-h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-bold);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg-1);
+}
+.visma-h2 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg-1);
+}
+.visma-h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg-1);
+}
+.visma-h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-heading);
+  color: var(--fg-1);
+}
+.visma-lead {
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+  color: var(--fg-2);
+}
+.visma-body {
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg-1);
+}
+.visma-small {
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+  color: var(--fg-2);
+}
+.visma-caption {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  color: var(--fg-3);
+}
+.visma-overline {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-overline);
+  line-height: 1.2;
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
